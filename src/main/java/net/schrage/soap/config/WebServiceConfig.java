@@ -1,6 +1,7 @@
 package net.schrage.soap.config;
 
 import jakarta.xml.ws.Endpoint;
+import net.schrage.soap.CustomerOrdersWsImpl;
 import net.schrage.soap.HelloWs;
 import org.apache.cxf.Bus;
 import org.apache.cxf.jaxws.EndpointImpl;
@@ -16,8 +17,8 @@ public class WebServiceConfig {
 
   @Bean
   public Endpoint endpoint() {
-    Endpoint endpoint = new EndpointImpl(bus, new HelloWs());
-    endpoint.publish("/hello");
+    Endpoint endpoint = new EndpointImpl(bus, new CustomerOrdersWsImpl());
+    endpoint.publish("/customerordersservice");
     return endpoint;
   }
 
