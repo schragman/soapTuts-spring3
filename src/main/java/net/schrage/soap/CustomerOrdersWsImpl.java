@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CustomerOrdersWsImpl implements net.schrage.soap.CustomerOrdersPortType {
+public class CustomerOrdersWsImpl implements CustomerOrdersPortType {
 
-  Map<BigInteger, List<net.schrage.soap.Order>> customerOrders = new HashMap<>();
+  Map<BigInteger, List<Order>> customerOrders = new HashMap<>();
   int currentId;
 
   public CustomerOrdersWsImpl() {
@@ -19,8 +19,8 @@ public class CustomerOrdersWsImpl implements net.schrage.soap.CustomerOrdersPort
   }
 
   public void init() {
-    List<net.schrage.soap.Order> orders = new ArrayList<>();
-    net.schrage.soap.Order order = new net.schrage.soap.Order();
+    List<Order> orders = new ArrayList<>();
+    Order order = new Order();
     order.setId(BigInteger.valueOf(1));
 
     Product product = new Product();
@@ -33,10 +33,10 @@ public class CustomerOrdersWsImpl implements net.schrage.soap.CustomerOrdersPort
   }
 
   @Override
-  public net.schrage.soap.GetOrdersResponse getOrders(net.schrage.soap.GetOrdersRequest request) {
+  public GetOrdersResponse getOrders(GetOrdersRequest request) {
     BigInteger customerId = request.getCustomerId();
-    List<net.schrage.soap.Order> orders = customerOrders.get(customerId);
-    net.schrage.soap.GetOrdersResponse response = new net.schrage.soap.GetOrdersResponse();
+    List<Order> orders = customerOrders.get(customerId);
+    GetOrdersResponse response = new GetOrdersResponse();
     response.getOrder().addAll(orders);
 
     return response;
@@ -44,13 +44,13 @@ public class CustomerOrdersWsImpl implements net.schrage.soap.CustomerOrdersPort
 
 
   @Override
-  public net.schrage.soap.CreateOrdersResponse createOrders(net.schrage.soap.CreateOrdersRequest request) {
+  public CreateOrdersResponse createOrders(CreateOrdersRequest request) {
     BigInteger customerId = request.customerId;
-    net.schrage.soap.Order order = request.getOrder();
-    List<net.schrage.soap.Order> orders = customerOrders.get(customerId);
+    Order order = request.getOrder();
+    List<Order> orders = customerOrders.get(customerId);
     orders.add(order);
 
-    net.schrage.soap.CreateOrdersResponse response = new net.schrage.soap.CreateOrdersResponse();
+    CreateOrdersResponse response = new CreateOrdersResponse();
 
     response.setResult(true);
 

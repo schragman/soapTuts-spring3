@@ -57,7 +57,7 @@
               <sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
               <wsdlOptions>
                 <wsdlOption>
-                  <wsdl>${basedir}/src/main/resources/CustomerOrders.wsdl</wsdl>
+                  <wsdl>${basedir}/src/main/resources/wsdl/CustomerOrders.wsdl</wsdl>
                 </wsdlOption>
               </wsdlOptions>
             </configuration>
