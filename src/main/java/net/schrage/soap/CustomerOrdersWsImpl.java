@@ -35,6 +35,9 @@ public class CustomerOrdersWsImpl implements CustomerOrdersPortType {
   @Override
   public GetOrdersResponse getOrders(GetOrdersRequest request) {
     BigInteger customerId = request.getCustomerId();
+    if (customerId == null || customerId.compareTo(BigInteger.ONE) == -1) {
+      throw new RuntimeException("Invalid customer id");
+    }
     List<Order> orders = customerOrders.get(customerId);
     GetOrdersResponse response = new GetOrdersResponse();
     response.getOrder().addAll(orders);
